@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>pvz</div>
+  <router-view />
 </template>
 
 <style lang="less"></style>

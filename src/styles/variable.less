@@ -1,0 +1,72 @@
+/* ------------------------- */
+/*       less变量声明         */
+/* ------------------------- */
+@tailwind base;
+
+/* 公共样式 */
+@base-border-radius: 5px;
+@base-button-background: #5143f4;
+@base-font-family: PingfangSC-Medium;
+@base-background-color: #1c1c22;
+
+@layer base {
+  .main-bg {
+    @apply w-full h-full;
+    background-color: #1c1c22;
+  }
+
+  .icon-btn {
+    width: 24px;
+    height: 24px;
+    @apply cursor-pointer;
+  }
+
+  /* Flex 快速样式 */
+
+  .f,
+  .fc,
+  .fsb,
+  .fsa,
+  .fcsb,
+  .fcc {
+    @apply flex;
+  }
+
+  .fc,
+  .fcc {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .fsb,
+  .fcsb {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .fsa {
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .fcsb,
+  .fcc {
+    flex-direction: column;
+  }
+
+  .tof {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+.single-line {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 登录页 */
+@login-background-color: #1c1c22;
