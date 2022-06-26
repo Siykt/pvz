@@ -137,3 +137,53 @@ table {
 input::-webkit-search-cancel-button {
   display: none;
 }
+
+.f,
+.fc,
+.fsb,
+.fsa,
+.fcsb,
+.fcc {
+  display: flex;
+}
+
+.fc,
+.fcc {
+  justify-content: center;
+  align-items: center;
+}
+
+.fsb,
+.fcsb {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fsa {
+  justify-content: space-around;
+  align-items: center;
+}
+
+.fcsb,
+.fcc {
+  flex-direction: column;
+}
+
+.tof {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.single-line {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.full {
+  width: 100%;
+  height: 100%;
+}
