@@ -8,6 +8,14 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       title: 'PVZ'
     }
+  },
+  {
+    path: '/game',
+    name: 'Game',
+    component: () => import('@/views/game/index.vue'),
+    meta: {
+      title: '开始游戏'
+    }
   }
 ]
 
