@@ -22,12 +22,7 @@ const emits = defineEmits(['click'])
   opacity: 1;
   border: 0;
   cursor: pointer;
-  background: no-repeat center/100% url('@/assets/images/menu-button.png');
-  transition: all 0.3s;
-
-  &:active {
-    opacity: 0.9 !important;
-    transform: scale(0.95) !important;
-  }
+  background: no-repeat url('@/assets/images/menu-button.png');
+  background-size: 100% 100%;
 }
 </style>

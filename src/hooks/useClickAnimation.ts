@@ -6,6 +6,7 @@ import { useEventListener } from '@vueuse/core'
  * @param time 回调间隔
  */
 export function useScaleAndOpacityPlayAnimation(el: HTMLElement, time = 300) {
+  el.style.transition = `all ${time}ms`
   const clearMousedown = useEventListener(el, 'mousedown', () => {
     el.style.transform = 'scale(0.95)'
     el.style.opacity = '0.9'
