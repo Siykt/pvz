@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, Ref } from 'vue'
-import MountainsAudio from '@/assets/music/mountains.ogg'
+import { ref, Ref, watch } from 'vue'
+import { useGameStoreRefs } from '@/store/game'
+import ChoosePlantBGM from '@/assets/musics/wait-bgm.mp3'
 
 interface Props {
   /** 自动播放背景音乐 */
@@ -13,16 +14,21 @@ withDefaults(defineProps<Props>(), {
   autoPlay: true
 })
 
-const BGMAudioRef: HTMLAudioElementRef = ref()
+const { isPause } = useGameStoreRefs()
+const choosePlantBGMRef: HTMLAudioElementRef = ref()
+
+watch(isPause, (value) => value && [ChoosePlantBGMControl.pause()])
 
 const createMusicControl = (audioElmRef: HTMLAudioElementRef) => ({
   play: () => audioElmRef.value?.play(),
   pause: () => audioElmRef.value?.pause()
 })
 
-defineExpose({ BGMControl: createMusicControl(BGMAudioRef) })
+const ChoosePlantBGMControl = createMusicControl(choosePlantBGMRef)
+
+defineExpose({ ChoosePlantBGMControl })
 </script>
 <template>
-  <!-- 背景音乐 -->
-  <audio ref="BGMAudioRef" loop :src="MountainsAudio" :autoplay="autoPlay" />
+  <!-- 选择植物画面背景音乐 -->
+  <audio ref="choosePlantBGMRef" autoplay loop :src="ChoosePlantBGM" />
 </template>
