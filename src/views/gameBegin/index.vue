@@ -40,7 +40,7 @@ onDeactivated(() => clear && clear())
     width: 100%;
     height: 100%;
     position: relative;
-    background-image: url('@/assets/start-bg.png');
+    background-image: url('@/assets/images/start-bg.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }

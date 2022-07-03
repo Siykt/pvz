@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue'
-import MountainsAudio from '@/assets/mountains.ogg'
+import MountainsAudio from '@/assets/music/mountains.ogg'
 
 interface Props {
   /** 自动播放背景音乐 */
@@ -26,7 +26,3 @@ defineExpose({ BGMControl: createMusicControl(BGMAudioRef) })
   <!-- 背景音乐 -->
   <audio ref="BGMAudioRef" loop :src="MountainsAudio" :autoplay="autoPlay" />
 </template>
-
-<style lang="less" scoped>
-// something
-</style>

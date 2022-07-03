@@ -22,7 +22,7 @@ const emits = defineEmits(['click'])
   opacity: 1;
   border: 0;
   cursor: pointer;
-  background: no-repeat center/100% url('@/assets/menu-button.png');
+  background: no-repeat center/100% url('@/assets/images/menu-button.png');
   transition: all 0.3s;
 
   &:active {
