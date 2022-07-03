@@ -2,7 +2,6 @@
 import { ref, onMounted, onDeactivated, computed } from 'vue'
 import { setScaleToResize } from '@/utils/setScale'
 import { GameStatus, useGameStore } from '@/store/game'
-import MenuButton from './MenuButton.vue'
 
 const gameLayout = ref<HTMLDivElement>()
 let clear: () => void
@@ -16,10 +15,6 @@ const gameContentBGPositionX = computed(() => (gameStore.gameStatus === GameStat
 <template>
   <div class="full game-layout">
     <div ref="gameLayout" :style="{ backgroundPositionX: gameContentBGPositionX }" class="full game-content">
-      <div class="fc menu">
-        <MenuButton>暂停</MenuButton>
-        <MenuButton>菜单</MenuButton>
-      </div>
       <slot />
     </div>
   </div>
@@ -30,15 +25,9 @@ const gameContentBGPositionX = computed(() => (gameStore.gameStatus === GameStat
   position: relative;
   background: #000;
   .game-content {
-    background: url('@/assets/game-layout-bg.jpg') no-repeat;
+    background: url('@/assets/images/game-layout-bg.jpg') no-repeat;
     background-size: 1400px 600px;
-  }
-
-  .menu {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    z-index: 2;
+    transition: all 1s;
   }
 }
 </style>
