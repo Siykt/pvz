@@ -1,4 +1,5 @@
-import { defineStore } from 'pinia'
+import { Plant } from '@/components/Plant/type'
+import { defineStore, storeToRefs } from 'pinia'
 
 /** 游戏状态 */
 export enum GameStatus {
@@ -10,6 +11,13 @@ export enum GameStatus {
   ended
 }
 
+export interface PlayerData {
+  /** 阳光数 */
+  sun: number
+  /** 当局游戏选择的植物 */
+  plants: Plant[]
+}
+
 export interface GameStore {
   /** 游戏状态 */
   gameStatus: GameStatus
@@ -19,6 +27,8 @@ export interface GameStore {
   isDisabledMusic: boolean
   /** 是否开启自动收集阳光 */
   isAutoCollectingSun: boolean
+  /** 玩家数据 */
+  playerData: PlayerData
 }
 
 export const useGameStore = defineStore('GameStore', {
@@ -26,6 +36,9 @@ export const useGameStore = defineStore('GameStore', {
     gameStatus: GameStatus.choosePlant,
     isPause: false,
     isDisabledMusic: false,
-    isAutoCollectingSun: false
+    isAutoCollectingSun: false,
+    playerData: { sun: 0, plants: [] }
   })
 })
+
+export const useGameStoreRefs = () => storeToRefs(useGameStore())
