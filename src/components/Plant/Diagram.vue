@@ -14,7 +14,7 @@ defineProps<Props>()
 const emits = defineEmits<Emits>()
 </script>
 <template>
-  <div class="diagram fc" @click="emits('click', plant)">
+  <div class="diagram fc" @click="!disabled && emits('click', plant)">
     <img class="full absolute" src="@/assets/images/plants/diagram-bg.png">
     <img class="plant-diagram" :src="plant.diagram" alt="plant-diagram">
     <img class="full absolute" src="@/assets/images/plants/diagram-layout.png" alt="diagram-layout">
