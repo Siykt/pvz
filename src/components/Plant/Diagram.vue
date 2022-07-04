@@ -1,18 +1,23 @@
 <script setup lang="ts">
+import type { Plant } from '@/types/plant.d'
+
 interface Props {
-  plantDiagram: string
-  sun: number
+  plant: Plant
+}
+
+interface Emits {
+  (event: 'click', plant: Plant): void
 }
 
 defineProps<Props>()
-const emits = defineEmits(['click'])
+const emits = defineEmits<Emits>()
 </script>
 <template>
-  <div class="diagram fc" @click="emits('click')">
+  <div class="diagram fc" @click="emits('click', plant)">
     <img class="full absolute" src="@/assets/images/plants/diagram-bg.png">
-    <img class="plant-diagram" :src="plantDiagram" alt="plant-diagram">
+    <img class="plant-diagram" :src="plant.diagram" alt="plant-diagram">
     <img class="full absolute" src="@/assets/images/plants/diagram-layout.png" alt="diagram-layout">
-    <span class="absolute sun">{{ sun }}</span>
+    <span class="absolute sun">{{ plant.sun }}</span>
   </div>
 </template>
 
