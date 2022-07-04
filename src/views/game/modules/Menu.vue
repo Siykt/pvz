@@ -1,26 +1,40 @@
 <script setup lang="ts">
-import { GameStatus, useGameStore } from '@/store/game'
-import { storeToRefs } from 'pinia'
+import { GameStatus, useGameStoreRefs } from '@/store/game'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import MenuButton from './MenuButton.vue'
 
-const { gameStatus, isPause, isDisabledMusic, isAutoCollectingSun } = storeToRefs(useGameStore())
+const { gameStatus, isPause, isDisabledMusic, isAutoCollectingSun, musicControl } = useGameStoreRefs()
 const router = useRouter()
+
+const playButtonClickTone = () => musicControl.value?.ButtonClickToneControl?.replay()
 
 const showDialog = ref(false)
 const handleShowMenu = () => {
   showDialog.value = isPause.value = true
+  musicControl.value?.PauseToneControl?.replay()
+}
+const handleContinueGame = () => {
+  isPause.value = showDialog.value = false
+  playButtonClickTone()
 }
 const handleReplay = () => {
   gameStatus.value = GameStatus.choosePlant
   handleContinueGame()
 }
-const handleContinueGame = () => {
-  isPause.value = showDialog.value = false
-}
 const handleToGameBegin = () => {
   router.push('/')
+}
+const handleDisabledMusic = () => {
+  isDisabledMusic.value = !isDisabledMusic.value
+  if (!isDisabledMusic.value && musicControl.value?.ButtonClickToneControl) {
+    musicControl.value.ButtonClickToneControl.disabled = false
+    playButtonClickTone()
+  }
+}
+const handleChangeAutoCollectingSun = () => {
+  isAutoCollectingSun.value = !isAutoCollectingSun.value
+  playButtonClickTone()
 }
 </script>
 <template>
@@ -35,14 +49,11 @@ const handleToGameBegin = () => {
           <MenuButton class="btn" @click="handleReplay">重新开始</MenuButton>
           <MenuButton class="btn" @click="handleToGameBegin">返回菜单</MenuButton>
           <!-- 开启/关闭音乐 -->
-          <MenuButton
-            class="btn"
-            @click="isDisabledMusic = !isDisabledMusic"
-          >{{ isDisabledMusic ? '开启' : '关闭' }}音乐</MenuButton>
+          <MenuButton class="btn" @click="handleDisabledMusic">{{ isDisabledMusic ? '开启' : '关闭' }}音乐</MenuButton>
           <!-- 开启/关闭自动收集阳光 -->
           <MenuButton
             class="btn"
-            @click="isAutoCollectingSun = !isAutoCollectingSun"
+            @click="handleChangeAutoCollectingSun"
           >{{ isAutoCollectingSun ? '关闭' : '开启' }}自动收集阳光</MenuButton>
         </div>
         <MenuButton class="btn" @click="handleContinueGame">继续游戏</MenuButton>
