@@ -3,10 +3,12 @@ import { GameStatus, useGameStoreRefs } from '@/store/game'
 import Diagram from '@/components/Plant/Diagram.vue'
 import { Plant } from '@/types/plant.d'
 
-const { playerData, gameStatus } = useGameStoreRefs()
+const { playerData, gameStatus, musicControl } = useGameStoreRefs()
+
 const handleChoosePlant = (plant: Plant) => {
   if (gameStatus.value === GameStatus.choosePlant) {
     playerData.value.plants = playerData.value.plants.filter(({ key }) => plant.key !== key)
+    musicControl.value.ChoosePlantToneControl?.replay()
   }
 }
 </script>

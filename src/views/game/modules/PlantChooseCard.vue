@@ -6,17 +6,16 @@ import { Plant } from '@/types/plant.d'
 import { ref, watch } from 'vue'
 import { difference } from 'lodash'
 
-const { playerData } = useGameStoreRefs()
+const { playerData, musicControl } = useGameStoreRefs()
 const isChoosePlantMap = ref<{ [x: Plant['key']]: boolean }>({})
 
 const handleChoosePlant = (plant: Plant) => {
-  if (!isChoosePlantMap.value[plant.key]) {
-    isChoosePlantMap.value = {
-      ...isChoosePlantMap.value,
-      [plant.key]: true
-    }
-    playerData.value.plants = playerData.value.plants.concat(plant)
+  isChoosePlantMap.value = {
+    ...isChoosePlantMap.value,
+    [plant.key]: true
   }
+  playerData.value.plants = playerData.value.plants.concat(plant)
+  musicControl.value.ChoosePlantToneControl?.replay()
 }
 
 watch<Plant[]>(
