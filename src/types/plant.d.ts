@@ -6,6 +6,8 @@ export interface Bullet {
 }
 
 export interface Plant {
+  /** 唯一标识 */
+  key: string
   /** 静态表示图地址 */
   diagram: string
   /** 动态表示图地址 */

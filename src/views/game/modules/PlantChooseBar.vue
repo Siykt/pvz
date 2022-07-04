@@ -1,14 +1,20 @@
 <script setup lang="ts">
-import { useGameStoreRefs } from '@/store/game'
+import { GameStatus, useGameStoreRefs } from '@/store/game'
 import Diagram from '@/components/Plant/Diagram.vue'
+import { Plant } from '@/types/plant.d'
 
-const { playerData } = useGameStoreRefs()
+const { playerData, gameStatus } = useGameStoreRefs()
+const handleChoosePlant = (plant: Plant) => {
+  if (gameStatus.value === GameStatus.choosePlant) {
+    playerData.value.plants = playerData.value.plants.filter(({ key }) => plant.key !== key)
+  }
+}
 </script>
 <template>
   <div class="plant-choose-bar">
     <div class="sun-count fc">{{ playerData.sun }}</div>
     <div class="plant-list f">
-      <Diagram v-for="(plant, i) in playerData.plants" :key="i" :plant="plant" />
+      <Diagram v-for="(plant, i) in playerData.plants" :key="i" :plant="plant" @click="handleChoosePlant" />
     </div>
   </div>
 </template>
