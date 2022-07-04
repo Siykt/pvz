@@ -1,4 +1,5 @@
 import { Plant } from '@/components/Plant/type'
+import { GameMusicControl } from '@/types/music'
 import { defineStore, storeToRefs } from 'pinia'
 
 /** 游戏状态 */
@@ -29,6 +30,8 @@ export interface GameStore {
   isAutoCollectingSun: boolean
   /** 玩家数据 */
   playerData: PlayerData
+  /** 挂载 Store 的音乐控件 */
+  musicControl: GameMusicControl
 }
 
 export const useGameStore = defineStore('GameStore', {
@@ -37,7 +40,8 @@ export const useGameStore = defineStore('GameStore', {
     isPause: false,
     isDisabledMusic: false,
     isAutoCollectingSun: false,
-    playerData: { sun: 0, plants: [] }
+    playerData: { sun: 0, plants: [] },
+    musicControl: {}
   })
 })
 
