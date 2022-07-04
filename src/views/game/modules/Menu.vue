@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import MenuButton from './MenuButton.vue'
 
-const { gameStatus, isPause, isDisabledMusic, isAutoCollectingSun, musicControl } = useGameStoreRefs()
+const { gameStatus, isPause, isDisabledMusic, isAutoCollectingSun, musicControl, playerData } = useGameStoreRefs()
 const router = useRouter()
 
 const playButtonClickTone = () => musicControl.value?.ButtonClickToneControl?.replay()
@@ -20,6 +20,7 @@ const handleContinueGame = () => {
 }
 const handleReplay = () => {
   gameStatus.value = GameStatus.choosePlant
+  playerData.value.plants = []
   handleContinueGame()
 }
 const handleToGameBegin = () => {
