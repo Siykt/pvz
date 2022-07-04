@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, Ref, watch } from 'vue'
 import { useGameStoreRefs } from '@/store/game'
+import { GameMusicControl, MusicControl } from '@/types/music'
 import ChoosePlantBGM from '@/assets/musics/wait-bgm.mp3'
 import PauseOGG from '@/assets/musics/pause.ogg'
 import ButtonClickOGG from '@/assets/musics/button-click.ogg'
-import { GameMusicControl, MusicControl } from '@/types/music'
+import ChoosePlantOGG from '@/assets/musics/choose-plant.ogg'
 
 interface Props {
   /** 自动播放背景音乐 */
@@ -19,6 +20,7 @@ const { musicControl, isDisabledMusic, isPause } = useGameStoreRefs()
 const choosePlantBGMRef: HTMLAudioElementRef = ref()
 const pauseToneRef: HTMLAudioElementRef = ref()
 const buttonClickToneRef: HTMLAudioElementRef = ref()
+const ChoosePlantToneRef: HTMLAudioElementRef = ref()
 
 const createMusicControl = (ref: HTMLAudioElementRef): MusicControl => {
   const control: MusicControl = {
@@ -38,9 +40,15 @@ const createMusicControl = (ref: HTMLAudioElementRef): MusicControl => {
 const ChoosePlantBGMControl = createMusicControl(choosePlantBGMRef)
 const PauseToneControl = createMusicControl(pauseToneRef)
 const ButtonClickToneControl = createMusicControl(buttonClickToneRef)
+const ChoosePlantToneControl = createMusicControl(ChoosePlantToneRef)
 
 // 交移控制权
-const exposeMusicControl: GameMusicControl = { ChoosePlantBGMControl, PauseToneControl, ButtonClickToneControl }
+const exposeMusicControl: GameMusicControl = {
+  ChoosePlantBGMControl,
+  PauseToneControl,
+  ButtonClickToneControl,
+  ChoosePlantToneControl
+}
 musicControl.value = exposeMusicControl
 defineExpose(exposeMusicControl)
 
@@ -73,4 +81,6 @@ watch(isPause, (pause) => (pause ? lastPlayBGMControl.value?.pause() : lastPlayB
   <audio ref="pauseToneRef" :src="PauseOGG" />
   <!-- 按钮操作音 -->
   <audio ref="buttonClickToneRef" :src="ButtonClickOGG" />
+  <!-- 选择植物操作音 -->
+  <audio ref="ChoosePlantToneRef" :src="ChoosePlantOGG" />
 </template>
