@@ -8,7 +8,7 @@ const { playerData } = useGameStoreRefs()
   <div class="plant-choose-bar">
     <div class="sun-count fc">{{ playerData.sun }}</div>
     <div class="plant-list f">
-      <Diagram v-for="(plant, i) in playerData.plants" :key="i" :plant-diagram="plant.diagram" :sun="plant.sun" />
+      <Diagram v-for="(plant, i) in playerData.plants" :key="i" :plant="plant" />
     </div>
   </div>
 </template>
