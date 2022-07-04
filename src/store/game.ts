@@ -1,4 +1,4 @@
-import { Plant } from '@/components/Plant/type'
+import { Plant } from '@/types/plant'
 import { GameMusicControl } from '@/types/music'
 import { defineStore, storeToRefs } from 'pinia'
 
