@@ -24,6 +24,7 @@ const { playerData } = useGameStoreRefs()
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position-x: -40px;
+  user-select: none;
   .sun-count {
     position: absolute;
     left: 20px;

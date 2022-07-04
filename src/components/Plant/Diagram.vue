@@ -21,6 +21,8 @@ const emits = defineEmits(['click'])
   position: relative;
   width: 48px;
   height: 64px;
+  cursor: pointer;
+  user-select: none;
   .absolute {
     position: absolute;
     top: 0;
