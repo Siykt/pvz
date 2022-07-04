@@ -17,6 +17,8 @@ export interface PlayerData {
   sun: number
   /** 当局游戏选择的植物 */
   plants: Plant[]
+  /** 当局游戏选择的植物的上限 */
+  plantLimit: number
 }
 
 export interface GameStore {
@@ -40,7 +42,7 @@ export const useGameStore = defineStore('GameStore', {
     isPause: false,
     isDisabledMusic: false,
     isAutoCollectingSun: false,
-    playerData: { sun: 0, plants: [] },
+    playerData: { sun: 0, plants: [], plantLimit: 5 },
     musicControl: {}
   })
 })
