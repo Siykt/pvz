@@ -20,7 +20,7 @@ export function setScale(el: HTMLElement, width: number, height: number) {
   el.style.width = width + 'px'
   el.style.height = height + 'px'
   el.style.transform = transform
-  return el
+  return { el, scale }
 }
 
 /**
@@ -33,11 +33,15 @@ export function setScaleToResize(el: HTMLElement, w = 1920, h = 1080) {
   el.style.top = '50%'
   el.style.left = '50%'
 
-  let resize: (() => HTMLElement) | null = () => setScale(el, w, h)
-  setScale(el, w, h)
+  let { scale } = setScale(el, w, h)
+  const resize = () => {
+    scale = setScale(el, w, h).scale
+  }
   window.addEventListener('resize', resize)
-  return () => {
-    resize && window.removeEventListener('resize', resize)
-    resize = null
+  return {
+    scale,
+    clear: () => {
+      resize && window.removeEventListener('resize', resize)
+    }
   }
 }
