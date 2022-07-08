@@ -1,6 +1,7 @@
 import { Plant } from '@/types/plant'
 import { GameMusicControl } from '@/types/music'
 import { defineStore, storeToRefs } from 'pinia'
+import { AllPlantMap } from '@/constants/plant'
 
 /** 游戏状态 */
 export enum GameStatus {
@@ -19,6 +20,8 @@ export interface PlayerData {
   plants: Plant[]
   /** 当局游戏选择的植物的上限 */
   plantLimit: number
+  /** 鼠标选中的植物 */
+  selectedPlant?: Plant & { event: MouseEvent }
 }
 
 export interface GameStore {
@@ -38,11 +41,11 @@ export interface GameStore {
 
 export const useGameStore = defineStore('GameStore', {
   state: (): GameStore => ({
-    gameStatus: GameStatus.choosePlant,
+    gameStatus: GameStatus.playing,
     isPause: false,
     isDisabledMusic: false,
     isAutoCollectingSun: false,
-    playerData: { sun: 0, plants: [], plantLimit: 5 },
+    playerData: { sun: 0, plants: [...AllPlantMap], plantLimit: 5 },
     musicControl: {}
   })
 })
