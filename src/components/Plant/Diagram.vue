@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { PlayerData } from '@/store/game'
 import type { Plant } from '@/types/plant.d'
 
 interface Props {
@@ -7,14 +8,14 @@ interface Props {
 }
 
 interface Emits {
-  (event: 'click', plant: Plant): void
+  (event: 'click', plantAndEvent: Required<PlayerData>['selectedPlant']): void
 }
 
 defineProps<Props>()
 const emits = defineEmits<Emits>()
 </script>
 <template>
-  <div class="diagram fc" @click="!disabled && emits('click', plant)">
+  <div class="diagram fc" @click="!disabled && emits('click', { ...plant, event: $event })">
     <img class="full absolute" src="@/assets/images/plants/diagram-bg.png">
     <img class="plant-diagram" :src="plant.diagram" alt="plant-diagram">
     <img class="full absolute" src="@/assets/images/plants/diagram-layout.png" alt="diagram-layout">
