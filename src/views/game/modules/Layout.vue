@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onDeactivated, computed, unref, Ref } from 'vue'
+import { ref, onMounted, onDeactivated, computed, unref } from 'vue'
 import { setScaleToResize } from '@/utils/setScale'
 import { GameStatus, useGameStoreRefs } from '@/store/game'
 
