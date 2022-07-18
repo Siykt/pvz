@@ -17,4 +17,6 @@ export interface GameMusicControl {
   ButtonClickToneControl?: MusicControl
   /** 选择植物操作音 */
   ChoosePlantToneControl?: MusicControl
+  /** 种植植物操作音 */
+  PlantToneControl?: MusicControl
 }

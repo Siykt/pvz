@@ -6,6 +6,7 @@ import ChoosePlantBGM from '@/assets/musics/wait-bgm.mp3'
 import PauseOGG from '@/assets/musics/pause.ogg'
 import ButtonClickOGG from '@/assets/musics/button-click.ogg'
 import ChoosePlantOGG from '@/assets/musics/choose-plant.ogg'
+import PlantOGG from '@/assets/musics/plant.ogg'
 
 interface Props {
   /** 自动播放背景音乐 */
@@ -21,6 +22,7 @@ const choosePlantBGMRef: HTMLAudioElementRef = ref()
 const pauseToneRef: HTMLAudioElementRef = ref()
 const buttonClickToneRef: HTMLAudioElementRef = ref()
 const ChoosePlantToneRef: HTMLAudioElementRef = ref()
+const PlantToneRef: HTMLAudioElementRef = ref()
 
 const createMusicControl = (ref: HTMLAudioElementRef): MusicControl => {
   const control: MusicControl = {
@@ -41,13 +43,15 @@ const ChoosePlantBGMControl = createMusicControl(choosePlantBGMRef)
 const PauseToneControl = createMusicControl(pauseToneRef)
 const ButtonClickToneControl = createMusicControl(buttonClickToneRef)
 const ChoosePlantToneControl = createMusicControl(ChoosePlantToneRef)
+const PlantToneControl = createMusicControl(PlantToneRef)
 
 // 交移控制权
 const exposeMusicControl: GameMusicControl = {
   ChoosePlantBGMControl,
   PauseToneControl,
   ButtonClickToneControl,
-  ChoosePlantToneControl
+  ChoosePlantToneControl,
+  PlantToneControl
 }
 musicControl.value = exposeMusicControl
 defineExpose(exposeMusicControl)
@@ -83,4 +87,6 @@ watch(isPause, (pause) => (pause ? lastPlayBGMControl.value?.pause() : lastPlayB
   <audio ref="buttonClickToneRef" :src="ButtonClickOGG" />
   <!-- 选择植物操作音 -->
   <audio ref="ChoosePlantToneRef" :src="ChoosePlantOGG" />
+  <!-- 种植植物操作音 -->
+  <audio ref="PlantToneRef" :src="PlantOGG" />
 </template>
