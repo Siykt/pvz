@@ -10,6 +10,7 @@ const handleChoosePlant = (plantAndEvent: Required<PlayerData>['selectedPlant'])
     musicControl.value.ChoosePlantToneControl?.replay()
   } else {
     playerData.value.selectedPlant = plantAndEvent
+    musicControl.value.PlantToneControl?.replay()
   }
 }
 </script>
