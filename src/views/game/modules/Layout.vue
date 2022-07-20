@@ -11,14 +11,29 @@ const gameLayout = ref<HTMLDivElement>()
 const plantInstanceRef = ref<HTMLImageElement>()
 const gameContentBGPositionX = computed(() => (gameStatus.value === GameStatus.choosePlant ? '-500px' : '-115px'))
 
+/**
+ * 计算缩放与边界
+ * @param pos Event坐标
+ * @param screenDistance 外部盒子屏幕距离参照
+ * @param boxSize 外部盒子大小参照
+ */
+function computeScaleAndBorder(pos: number, screenDistance: number, boxSize: number) {
+  const scale = unref(scaleRef)
+  // 处理缩放
+  let posComputed = Math.round((pos - (screenDistance || 0)) / scale)
+  // 处理边界
+  posComputed = Math.max(Math.min(posComputed, boxSize / scale), 0)
+  return posComputed
+}
+
 const getPlantInstancePosition = ({ clientX, clientY }: MouseEvent) => {
   if (!gameLayoutRect.value) return { left: '0px', top: '0px' }
-  const scale = unref(scaleRef)
-  const { top, height } = unref(gameLayoutRect) as DOMRect
-  // 处理缩放
-  const x = Math.round(clientX / scale)
-  // 处理边界
-  const y = Math.max(Math.min(Math.round((clientY - (top || 0)) / scale), height / scale), 0)
+  const { top, height, left, width } = unref(gameLayoutRect) as DOMRect
+
+  // 横轴(X轴)对应外部盒子与屏幕的left距离及其宽度
+  const x = computeScaleAndBorder(clientX, left, width)
+  // 纵轴(Y轴)对应外部盒子与屏幕的 top 距离及其高度
+  const y = computeScaleAndBorder(clientY, top, height)
   return {
     left: x + 'px',
     top: y + 'px'
