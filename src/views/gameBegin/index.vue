@@ -10,9 +10,10 @@ const playGame = () => {
 }
 
 const content = ref<HTMLDivElement>()
-let clear: () => void
-onMounted(() => (clear = setScaleToResize(content.value as HTMLDivElement, 800, 600)))
-onDeactivated(() => clear && clear())
+onMounted(() => {
+  const { clear } = setScaleToResize(content.value as HTMLDivElement, 800, 600)
+  onDeactivated(clear)
+})
 
 const BGMRef = ref<HTMLAudioElement>()
 </script>
