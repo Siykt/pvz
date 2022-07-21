@@ -2,8 +2,9 @@
 import { ref, onMounted, onDeactivated, computed, unref } from 'vue'
 import { setScaleToResize } from '@/utils/setScale'
 import { GameStatus, useGameStoreRefs } from '@/store/game'
+import { useEventListener } from '@vueuse/core'
 
-const { gameStatus, playerData } = useGameStoreRefs()
+const { gameStatus, playerData, musicControl } = useGameStoreRefs()
 
 const scaleRef = ref(0)
 const gameLayoutRect = ref<DOMRect>()
@@ -25,7 +26,7 @@ function computeScaleAndBorder(pos: number, screenDistance: number, boxSize: num
   posComputed = Math.max(Math.min(posComputed, boxSize / scale), 0)
   return posComputed
 }
-
+// 获取植物实例的位置
 const getPlantInstancePosition = ({ clientX, clientY }: MouseEvent) => {
   if (!gameLayoutRect.value) return { left: '0px', top: '0px' }
   const { top, height, left, width } = unref(gameLayoutRect) as DOMRect
@@ -39,6 +40,7 @@ const getPlantInstancePosition = ({ clientX, clientY }: MouseEvent) => {
     top: y + 'px'
   }
 }
+// 处理植物移动
 const handleMovePlant = (evn: MouseEvent) => {
   const el = unref(plantInstanceRef)
   if (!playerData.value.selectedPlant || !el) return
@@ -46,18 +48,37 @@ const handleMovePlant = (evn: MouseEvent) => {
   el.style.top = top
   el.style.left = left
 }
+// 取消植物选择
+const handleCannelPlantChoose = () => {
+  if (!playerData.value.selectedPlant) return
+  playerData.value.selectedPlant = undefined
+  musicControl.value.ChoosePlantToneControl?.play()
+}
+// 获取 gameLayoutRect
+const getGameLayoutRect = () => {
+  const el = gameLayout.value as HTMLDivElement
+  gameLayoutRect.value = el.getClientRects()[0]
+}
+useEventListener('resize', getGameLayoutRect)
+// 监听键位
+useEventListener('keydown', ({ code }) => {
+  // 监听 Esc 键位退出选择
+  if (code === 'Escape') {
+    handleCannelPlantChoose()
+  }
+})
+// 处理右键菜单
+useEventListener('contextmenu', (evn) => {
+  handleCannelPlantChoose()
+  evn.preventDefault()
+})
 
 onMounted(() => {
   const el = gameLayout.value as HTMLDivElement
   const { clear, scale } = setScaleToResize(el, 900, 600)
   scaleRef.value = scale
-  const getRect = () => (gameLayoutRect.value = el.getClientRects()[0])
-  getRect()
-  window.addEventListener('resize', getRect)
-  onDeactivated(() => {
-    clear()
-    window.removeEventListener('resize', getRect)
-  })
+  getGameLayoutRect()
+  onDeactivated(clear)
 })
 </script>
 <template>
