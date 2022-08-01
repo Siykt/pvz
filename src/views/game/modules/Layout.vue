@@ -48,6 +48,10 @@ const handleMovePlant = (evn: MouseEvent) => {
   el.style.top = top
   el.style.left = left
 }
+// 棋盘
+const handlePlantToChessboard = (evn: MouseEvent) => {
+  console.log('evn ->', evn)
+}
 // 取消植物选择
 const handleCannelPlantChoose = () => {
   if (!playerData.value.selectedPlant) return
@@ -97,6 +101,7 @@ onMounted(() => {
         :src="playerData.selectedPlant.diagram"
         :style="getPlantInstancePosition(playerData.selectedPlant.event)"
         alt="plant-instance"
+        @click="handlePlantToChessboard"
       >
     </div>
   </div>
