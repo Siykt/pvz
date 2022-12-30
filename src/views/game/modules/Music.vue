@@ -80,7 +80,7 @@ watch(isPause, (pause) => (pause ? lastPlayBGMControl.value?.pause() : lastPlayB
 </script>
 <template>
   <!-- 选择植物画面背景音乐 -->
-  <audio ref="choosePlantBGMRef" :autoplay="autoPlay" loop :src="ChoosePlantBGM" />
+  <audio ref="choosePlantBGMRef" :autoplay="autoPlay && !isDisabledMusic" loop :src="ChoosePlantBGM" />
   <!-- 暂停操作音 -->
   <audio ref="pauseToneRef" :src="PauseOGG" />
   <!-- 按钮操作音 -->
