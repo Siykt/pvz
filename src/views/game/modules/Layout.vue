@@ -4,7 +4,7 @@ import { setScaleToResize } from '@/utils/setScale'
 import { GameStatus, useGameStoreRefs } from '@/store/game'
 import { useEventListener } from '@vueuse/core'
 
-const { gameStatus, playerData, musicControl } = useGameStoreRefs()
+const { gameStatus, playerData, musicControl, curEvent } = useGameStoreRefs()
 
 const scaleRef = ref(0)
 const gameLayoutRect = ref<DOMRect>()
@@ -95,11 +95,11 @@ onMounted(() => {
     >
       <slot />
       <img
-        v-if="playerData.selectedPlant"
+        v-if="playerData.selectedPlant && curEvent"
         ref="plantInstanceRef"
         class="plant-instance"
         :src="playerData.selectedPlant.diagram"
-        :style="getPlantInstancePosition(playerData.selectedPlant.event)"
+        :style="getPlantInstancePosition(curEvent)"
         alt="plant-instance"
         @click="handlePlantToChessboard"
       />

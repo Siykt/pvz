@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { GameStatus, PlayerData, useGameStoreRefs } from '@/store/game'
+import { GameStatus, useGameStoreRefs } from '@/store/game'
 import Diagram from '@/components/Plant/Diagram.vue'
+import { Plant } from '@/types/plant'
 
 const { playerData, gameStatus, musicControl } = useGameStoreRefs()
 
-const handleChoosePlant = (plantAndEvent: Required<PlayerData>['selectedPlant']) => {
+const handleChoosePlant = (plant: Plant) => {
   if (gameStatus.value === GameStatus.choosePlant) {
-    playerData.value.plants = playerData.value.plants.filter(({ key }) => plantAndEvent.key !== key)
+    playerData.value.plants = playerData.value.plants.filter(({ key }) => plant.key !== key)
     musicControl.value.ChoosePlantToneControl?.replay()
   } else {
-    playerData.value.selectedPlant = plantAndEvent
+    playerData.value.selectedPlant = plant
     musicControl.value.PlantToneControl?.replay()
   }
 }

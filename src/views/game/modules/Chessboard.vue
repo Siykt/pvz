@@ -1,10 +1,8 @@
 <script setup lang="ts">
-// something
+import Diagram from '@/components/Plant/Diagram.vue'
 </script>
 <template>
-  <div>
-    <!-- something -->
-  </div>
+  <div>Diagram</div>
 </template>
 
 <style lang="less" scoped>

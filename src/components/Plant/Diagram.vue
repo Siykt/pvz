@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PlayerData } from '@/store/game'
+import { useGameStoreRefs } from '@/store/game'
 import type { Plant } from '@/types/plant.d'
 
 interface Props {
@@ -8,14 +8,21 @@ interface Props {
 }
 
 interface Emits {
-  (event: 'click', plantAndEvent: Required<PlayerData>['selectedPlant']): void
+  (event: 'click', plant: Plant): void
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 const emits = defineEmits<Emits>()
+const { curEvent } = useGameStoreRefs()
+
+const handleClickDiagram = (env: MouseEvent) => {
+  if (props.disabled) return
+  emits('click', props.plant)
+  curEvent.value = env
+}
 </script>
 <template>
-  <div class="diagram fc" @click="!disabled && emits('click', { ...plant, event: $event })">
+  <div class="diagram fc" @click="handleClickDiagram">
     <img class="full absolute" src="@/assets/images/plants/diagram-bg.png" />
     <img class="plant-diagram" :src="plant.diagram" alt="plant-diagram" />
     <img class="full absolute" src="@/assets/images/plants/diagram-layout.png" alt="diagram-layout" />

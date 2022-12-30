@@ -21,7 +21,7 @@ export interface PlayerData {
   /** 当局游戏选择的植物的上限 */
   plantLimit: number
   /** 鼠标选中的植物 */
-  selectedPlant?: Plant & { event: MouseEvent }
+  selectedPlant?: Plant
 }
 
 export interface GameStore {
@@ -37,16 +37,19 @@ export interface GameStore {
   playerData: PlayerData
   /** 挂载 Store 的音乐控件 */
   musicControl: GameMusicControl
+  /** 当前用户触发的事件数据 */
+  curEvent: Nullable<MouseEvent>
 }
 
 export const useGameStore = defineStore('GameStore', {
   state: (): GameStore => ({
     gameStatus: GameStatus.playing,
     isPause: false,
-    isDisabledMusic: false,
+    isDisabledMusic: true,
     isAutoCollectingSun: false,
     playerData: { sun: 0, plants: [...AllPlantMap], plantLimit: 5 },
-    musicControl: {}
+    musicControl: {},
+    curEvent: null
   })
 })
 
