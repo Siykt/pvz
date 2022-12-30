@@ -102,7 +102,7 @@ onMounted(() => {
         :style="getPlantInstancePosition(playerData.selectedPlant.event)"
         alt="plant-instance"
         @click="handlePlantToChessboard"
-      >
+      />
     </div>
   </div>
 </template>

@@ -7,6 +7,7 @@
     "build:prod": "vue-tsc --noEmit && vite build",
     "build:dev": "vue-tsc --noEmit && vite build --mode development",
     "build:test": "vue-tsc --noEmit && vite build --mode test",
+    "format": "prettier --write \"src/**/*.@(ts|vue|tsx|)\"",
     "preview": "vite preview"
   },
   "dependencies": {

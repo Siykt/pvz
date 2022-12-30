@@ -16,9 +16,9 @@ const emits = defineEmits<Emits>()
 </script>
 <template>
   <div class="diagram fc" @click="!disabled && emits('click', { ...plant, event: $event })">
-    <img class="full absolute" src="@/assets/images/plants/diagram-bg.png">
-    <img class="plant-diagram" :src="plant.diagram" alt="plant-diagram">
-    <img class="full absolute" src="@/assets/images/plants/diagram-layout.png" alt="diagram-layout">
+    <img class="full absolute" src="@/assets/images/plants/diagram-bg.png" />
+    <img class="plant-diagram" :src="plant.diagram" alt="plant-diagram" />
+    <img class="full absolute" src="@/assets/images/plants/diagram-layout.png" alt="diagram-layout" />
     <span class="absolute sun">{{ plant.sun }}</span>
     <div v-show="disabled" class="full diagram-disabled" />
   </div>

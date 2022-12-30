@@ -44,7 +44,7 @@ const handleChangeAutoCollectingSun = () => {
   </div>
   <transition name="fade">
     <div v-show="showDialog" class="menu-dialog fc full">
-      <img class="menu-dialog-bg" src="@/assets/images/menu-dialog-bg.png" alt="menu-dialog-bg">
+      <img class="menu-dialog-bg" src="@/assets/images/menu-dialog-bg.png" alt="menu-dialog-bg" />
       <div class="menu-dialog-content fcsb">
         <div class="menu-dialog-options fcc">
           <MenuButton class="btn" @click="handleReplay">重新开始</MenuButton>
@@ -52,10 +52,9 @@ const handleChangeAutoCollectingSun = () => {
           <!-- 开启/关闭音乐 -->
           <MenuButton class="btn" @click="handleDisabledMusic">{{ isDisabledMusic ? '开启' : '关闭' }}音乐</MenuButton>
           <!-- 开启/关闭自动收集阳光 -->
-          <MenuButton
-            class="btn"
-            @click="handleChangeAutoCollectingSun"
-          >{{ isAutoCollectingSun ? '关闭' : '开启' }}自动收集阳光</MenuButton>
+          <MenuButton class="btn" @click="handleChangeAutoCollectingSun">
+            {{ isAutoCollectingSun ? '关闭' : '开启' }}自动收集阳光
+          </MenuButton>
         </div>
         <MenuButton class="btn" @click="handleContinueGame">继续游戏</MenuButton>
       </div>
