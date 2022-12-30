@@ -1,5 +1,5 @@
-import { Plant } from '@/types/plant'
-import { GameMusicControl } from '@/types/music'
+import { Plant } from '@/models/plant'
+import { GameMusicControl } from '@/models/music'
 import { defineStore, storeToRefs } from 'pinia'
 import { AllPlantMap } from '@/constants/plant'
 
@@ -39,6 +39,8 @@ export interface GameStore {
   musicControl: GameMusicControl
   /** 当前用户触发的事件数据 */
   curEvent: Nullable<MouseEvent>
+  /** 已经种植至场地的植物 */
+  plantedPlantList: Plant[]
 }
 
 export const useGameStore = defineStore('GameStore', {
@@ -49,7 +51,8 @@ export const useGameStore = defineStore('GameStore', {
     isAutoCollectingSun: false,
     playerData: { sun: 0, plants: [...AllPlantMap], plantLimit: 5 },
     musicControl: {},
-    curEvent: null
+    curEvent: null,
+    plantedPlantList: []
   })
 })
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useGameStoreRefs } from '@/store/game'
-import type { Plant } from '@/types/plant.d'
+import { Plant } from '@/models/plant'
 
 interface Props {
   plant: Plant

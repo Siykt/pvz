@@ -1,4 +1,4 @@
-import { Plant } from '@/types/plant.d'
+import { Plant } from '@/models/plant'
 import Plant1Diagram from '@/assets/images/plants/plant-1.png'
 import Plant1Gif from '@/assets/images/plants/plant-1.gif'
 import Plant1Bullet from '@/assets/images/plants/plant-1-bullet.png'

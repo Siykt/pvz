@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { GameStatus, useGameStoreRefs } from '@/store/game'
 import Diagram from '@/components/Plant/Diagram.vue'
-import { Plant } from '@/types/plant'
+import { Plant } from '@/models/plant'
 
 const { playerData, gameStatus, musicControl } = useGameStoreRefs()
 

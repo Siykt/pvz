@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, Ref, watch } from 'vue'
 import { useGameStoreRefs } from '@/store/game'
-import { GameMusicControl, MusicControl } from '@/types/music'
+import { GameMusicControl, MusicControl } from '@/models/music'
 import ChoosePlantBGM from '@/assets/musics/wait-bgm.mp3'
 import PauseOGG from '@/assets/musics/pause.ogg'
 import ButtonClickOGG from '@/assets/musics/button-click.ogg'

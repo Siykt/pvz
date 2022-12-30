@@ -2,7 +2,7 @@
 import { GameStatus, useGameStoreRefs } from '@/store/game'
 import Diagram from '@/components/Plant/Diagram.vue'
 import { AllPlantMap } from '@/constants/plant'
-import { Plant } from '@/types/plant.d'
+import { Plant } from '@/models/plant'
 import { computed, onMounted, ref, watch } from 'vue'
 import { difference } from 'lodash'
 import { useScaleAndOpacityPlayAnimation } from '@/hooks/useClickAnimation'
